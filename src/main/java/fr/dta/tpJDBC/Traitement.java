@@ -8,13 +8,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Traitement {
-	public static void addBook(Book b) {
+	public static void addBook(Book b) throws SQLException {
 
 		PreparedStatement insertion;
-
+		Connection conn = null;
 		try {
 			String url = "jdbc:postgresql://localhost:5432/tpJDBC";
-			Connection conn = DriverManager.getConnection(url, "postgres", "azerty");
+			conn = DriverManager.getConnection(url, "postgres", "azerty");
 			insertion = conn.prepareStatement("INSERT INTO Book(title, author) VALUES(?, ?)",
 					Statement.RETURN_GENERATED_KEYS);
 
@@ -30,15 +30,18 @@ public class Traitement {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			conn.close();
 		}
 
 	}
 
-	public static void addClient(Client c) {
+	public static void addClient(Client c) throws SQLException {
 		PreparedStatement addClient;
+		Connection conn = null;
 		try {
 			String url = "jdbc:postgresql://localhost:5432/tpJDBC";
-			Connection conn = DriverManager.getConnection(url, "postgres", "azerty");
+			conn = DriverManager.getConnection(url, "postgres", "azerty");
 			addClient = conn.prepareStatement(
 					"insert into Client(lastname, firstname, gender, favbook) values(?, ?, ?, ?)",
 					Statement.RETURN_GENERATED_KEYS);
@@ -59,15 +62,18 @@ public class Traitement {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			conn.close();
 		}
 
 	}
 
-	public static void achatClient(Book b, Client c) {
+	public static void achatClient(Book b, Client c) throws SQLException {
 		PreparedStatement achatClient;
+		Connection conn = null;
 		try {
 			String url = "jdbc:postgresql://localhost:5432/tpJDBC";
-			Connection conn = DriverManager.getConnection(url, "postgres", "azerty");
+			conn = DriverManager.getConnection(url, "postgres", "azerty");
 			achatClient = conn.prepareStatement("insert into Bookachete(id_client, id_book) values(?, ?)");
 
 			achatClient.setInt(1, c.getId());
@@ -78,14 +84,17 @@ public class Traitement {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			
+			conn.close();
 		}
 	}
 
-	public static void livreParClient(Client c) {
-
+	public static void livreParClient(Client c) throws SQLException {
+		Connection conn = null;
 		try {
 			String url = "jdbc:postgresql://localhost:5432/tpJDBC";
-			Connection conn = DriverManager.getConnection(url, "postgres", "azerty");
+			conn = DriverManager.getConnection(url, "postgres", "azerty");
 			PreparedStatement livreParClient = conn.prepareStatement(
 					"select title, author from book join bookachete on book.id = bookachete.id_book where bookachete.id_client = ?");
 
@@ -103,14 +112,17 @@ public class Traitement {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			conn.close();
 		}
 		
 	}
-	public static void clientsParLivre(Book b) {
-
+	public static void clientsParLivre(Book b) throws SQLException {
+		Connection conn = null;
+		
 		try {
 			String url = "jdbc:postgresql://localhost:5432/tpJDBC";
-			Connection conn = DriverManager.getConnection(url, "postgres", "azerty");
+			conn = DriverManager.getConnection(url, "postgres", "azerty");
 			PreparedStatement clientsParLivre = conn.prepareStatement(
 					"select lastname, firstname from client join bookachete on client.id = bookachete.id_client where bookachete.id_book = ?");
 
@@ -128,7 +140,10 @@ public class Traitement {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			conn.close();
 		}
+		
 		
 	}
 	

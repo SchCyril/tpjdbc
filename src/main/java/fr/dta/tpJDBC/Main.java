@@ -11,11 +11,12 @@ import java.sql.Statement;
  */
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 
 		String url = "jdbc:postgresql://localhost:5432/tpJDBC";
+		Connection conn = null;
 		try {
-			Connection conn = DriverManager.getConnection(url, "postgres", "azerty");
+			conn = DriverManager.getConnection(url, "postgres", "azerty");
 			Statement stmt = conn.createStatement();
 
 			stmt.executeUpdate("drop table if exists Book cascade");
@@ -60,6 +61,9 @@ public class Main {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		finally {
+			conn.close();
 		}
 
 		
