@@ -4,8 +4,8 @@ public class Client {
 	private int id;
 	private String lastname;
 	private String firstname;
-	public String gender;
-	public Integer favbook;
+	private String gender;
+	private Integer favbook;
 
 	public Client(String lastname, String firstname, String gender, Integer favbook) {
 		
