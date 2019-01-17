@@ -14,13 +14,13 @@ public class Traitement {
 
 		try (Connection conn = DriverManager.getConnection(url, "postgres", "azerty");
 				PreparedStatement insertion = conn.prepareStatement("INSERT INTO Book(title, author) VALUES(?, ?)",
-						Statement.RETURN_GENERATED_KEYS)) {
+						Statement.RETURN_GENERATED_KEYS);
+				ResultSet generatedKeys = insertion.getGeneratedKeys()) {
 
 			insertion.setString(1, b.getTitle());
 			insertion.setString(2, b.getAuthor());
 			insertion.executeUpdate();
 
-			ResultSet generatedKeys = insertion.getGeneratedKeys();
 			generatedKeys.next();
 			int id = generatedKeys.getInt("id");
 			b.setId(id);
@@ -37,7 +37,8 @@ public class Traitement {
 		try (Connection conn = DriverManager.getConnection(url, "postgres", "azerty");
 				PreparedStatement addClient = conn.prepareStatement(
 						"insert into Client(lastname, firstname, gender, favbook) values(?, ?, ?, ?)",
-						Statement.RETURN_GENERATED_KEYS)) {
+						Statement.RETURN_GENERATED_KEYS);
+				ResultSet generatedKeysClient = addClient.getGeneratedKeys()) {
 
 			addClient.setString(1, c.getLastname());
 			addClient.setString(2, c.getFirstname());
@@ -47,7 +48,6 @@ public class Traitement {
 
 			addClient.executeUpdate();
 
-			ResultSet generatedKeysClient = addClient.getGeneratedKeys();
 			generatedKeysClient.next();
 			int idClient = generatedKeysClient.getInt("id");
 			c.setId(idClient);
@@ -81,11 +81,10 @@ public class Traitement {
 		String url = "jdbc:postgresql://localhost:5432/tpJDBC";
 		try (Connection conn = DriverManager.getConnection(url, "postgres", "azerty");
 				PreparedStatement livreParClient = conn.prepareStatement(
-						"select title, author from book join bookachete on book.id = bookachete.id_book where bookachete.id_client = ?")) {
+						"select title, author from book join bookachete on book.id = bookachete.id_book where bookachete.id_client = ?");
+				ResultSet resultSet = livreParClient.executeQuery()) {
 
 			livreParClient.setInt(1, c.getId());
-
-			ResultSet resultSet = livreParClient.executeQuery();
 
 			while (resultSet.next()) {
 
@@ -105,11 +104,10 @@ public class Traitement {
 		String url = "jdbc:postgresql://localhost:5432/tpJDBC";
 		try (Connection conn = DriverManager.getConnection(url, "postgres", "azerty");
 				PreparedStatement clientsParLivre = conn.prepareStatement(
-						"select lastname, firstname from client join bookachete on client.id = bookachete.id_client where bookachete.id_book = ?")) {
+						"select lastname, firstname from client join bookachete on client.id = bookachete.id_client where bookachete.id_book = ?");
+				ResultSet resultSet = clientsParLivre.executeQuery();) {
 
 			clientsParLivre.setInt(1, b.getId());
-
-			ResultSet resultSet = clientsParLivre.executeQuery();
 
 			while (resultSet.next()) {
 				System.out.println(b.getTitle());
