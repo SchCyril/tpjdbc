@@ -57,7 +57,7 @@ public class Main {
 
 			Traitement.livreParClient(c1);
 			Traitement.clientsParLivre(b1);
-			// Traitement.achatClient(b3, c3);
+			
 
 		} catch (SQLException e) {
 
