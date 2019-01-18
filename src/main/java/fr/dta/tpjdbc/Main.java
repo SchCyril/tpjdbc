@@ -20,7 +20,6 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		
 		IOcean.printSomething();
 		String url = "jdbc:postgresql://localhost:5432/tpJDBC";
 		try (Connection conn = DriverManager.getConnection(url, "postgres", "azerty");
