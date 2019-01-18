@@ -117,7 +117,7 @@ public class Traitement {
 			clientsParLivre.setInt(1, b.getId());
 
 			while (resultSet.next()) {
-				System.out.println(b.getTitle());
+				
 				String nom = resultSet.getString("lastname");
 				String prenom = resultSet.getString("firstname");
 				
