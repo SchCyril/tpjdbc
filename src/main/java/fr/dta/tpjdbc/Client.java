@@ -1,4 +1,4 @@
-package fr.dta.tpJDBC;
+package fr.dta.tpjdbc;
 
 public class Client {
 	private int id;

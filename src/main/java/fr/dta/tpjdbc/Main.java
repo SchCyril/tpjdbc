@@ -1,4 +1,4 @@
-package fr.dta.tpJDBC;
+package fr.dta.tpjdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
  */
 public class Main {
 	
-	final static Logger logger = LoggerFactory.getLogger(Traitement.class);
+	 private static final Logger LOGGER = LoggerFactory.getLogger(Traitement.class);
 
 	public static void main(String[] args) {
 		
@@ -60,7 +60,7 @@ public class Main {
 
 		} catch (SQLException e) {
 
-			logger.warn("attention");
+			LOGGER.warn("attention");
 		}
 
 	}

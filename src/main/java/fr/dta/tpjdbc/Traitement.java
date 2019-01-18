@@ -1,4 +1,4 @@
-package fr.dta.tpJDBC;
+package fr.dta.tpjdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 
 
 public class Traitement {
-	final static Logger logger = LoggerFactory.getLogger(Traitement.class);
+	private static final  Logger LOGGER = LoggerFactory.getLogger(Traitement.class);
 
 	public static void addBook(Book b) {
 
@@ -33,7 +33,7 @@ public class Traitement {
 			b.setId(id);
 
 		} catch (SQLException e) {
-			logger.trace("error");
+			LOGGER.trace("error");
 
 		}
 
@@ -60,7 +60,7 @@ public class Traitement {
 			c.setId(idClient);
 
 		} catch (SQLException e) {
-			logger.trace("error");
+			LOGGER.trace("error");
 		}
 
 	}
@@ -78,7 +78,7 @@ public class Traitement {
 			achatClient.executeUpdate();
 
 		} catch (SQLException e) {
-			logger.trace("error");
+			LOGGER.trace("error");
 		}
 	}
 
@@ -95,11 +95,11 @@ public class Traitement {
 
 				String title = resultSet.getString("title");
 				String author = resultSet.getString("author");
-				logger.info(title + author);
+				LOGGER.info(title + author);
 			}
 
 		} catch (SQLException e) {
-			logger.trace("error");
+			LOGGER.trace("error");
 		}
 
 	}
@@ -118,12 +118,12 @@ public class Traitement {
 				String nom = resultSet.getString("lastname");
 				String prenom = resultSet.getString("firstname");
 				
-				logger.info(nom + prenom);
+				LOGGER.info(nom + prenom);
 				
 			}
 
 		} catch (SQLException e) {
-			logger.trace("error");
+			LOGGER.trace("error");
 		}
 
 	}
