@@ -14,10 +14,11 @@ import org.slf4j.LoggerFactory;
 
 public class Traitement {
 	private static final  Logger LOGGER = LoggerFactory.getLogger(Traitement.class);
+	private static final String url = "jdbc:postgresql://localhost:5432/tpJDBC";
 
 	public static void addBook(Book b) {
 
-		String url = "jdbc:postgresql://localhost:5432/tpJDBC";
+		
 
 		try (Connection conn = DriverManager.getConnection(url, "postgres", "azerty");
 				PreparedStatement insertion = conn.prepareStatement("INSERT INTO Book(title, author) VALUES(?, ?)",
@@ -40,7 +41,7 @@ public class Traitement {
 	}
 
 	public static void addClient(Client c) {
-		String url = "jdbc:postgresql://localhost:5432/tpJDBC";
+		
 		try (Connection conn = DriverManager.getConnection(url, "postgres", "azerty");
 				PreparedStatement addClient = conn.prepareStatement(
 						"insert into Client(lastname, firstname, gender, favbook) values(?, ?, ?, ?)",
@@ -67,7 +68,7 @@ public class Traitement {
 
 	public static void achatClient(Book b, Client c) {
 
-		String url = "jdbc:postgresql://localhost:5432/tpJDBC";
+		
 		try (Connection conn = DriverManager.getConnection(url, "postgres", "azerty");
 				PreparedStatement achatClient = conn
 						.prepareStatement("insert into Bookachete(id_client, id_book) values(?, ?)")) {
@@ -83,7 +84,7 @@ public class Traitement {
 	}
 
 	public static void livreParClient(Client c) {
-		String url = "jdbc:postgresql://localhost:5432/tpJDBC";
+		
 		try (Connection conn = DriverManager.getConnection(url, "postgres", "azerty");
 				PreparedStatement livreParClient = conn.prepareStatement(
 						"select title, author from book join bookachete on book.id = bookachete.id_book where bookachete.id_client = ?");
