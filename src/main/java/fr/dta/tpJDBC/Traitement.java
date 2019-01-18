@@ -7,7 +7,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
+
 public class Traitement {
+	final static Logger logger = LoggerFactory.getLogger(Traitement.class);
+
 	public static void addBook(Book b) {
 
 		String url = "jdbc:postgresql://localhost:5432/tpJDBC";
@@ -27,7 +34,7 @@ public class Traitement {
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+
 		}
 
 	}
@@ -90,7 +97,7 @@ public class Traitement {
 
 				String title = resultSet.getString("title");
 				String author = resultSet.getString("author");
-				System.out.println(title + " " + author);
+				logger.info(title + author);
 			}
 
 		} catch (SQLException e) {
@@ -113,7 +120,9 @@ public class Traitement {
 				System.out.println(b.getTitle());
 				String nom = resultSet.getString("lastname");
 				String prenom = resultSet.getString("firstname");
-				System.out.println(nom + " " + prenom);
+				
+				logger.info(nom + prenom);
+				
 			}
 
 		} catch (SQLException e) {
