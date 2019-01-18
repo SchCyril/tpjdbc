@@ -33,7 +33,7 @@ public class Traitement {
 			b.setId(id);
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			logger.trace("error");
 
 		}
 
@@ -60,8 +60,7 @@ public class Traitement {
 			c.setId(idClient);
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.trace("error");
 		}
 
 	}
@@ -79,8 +78,7 @@ public class Traitement {
 			achatClient.executeUpdate();
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.trace("error");
 		}
 	}
 
@@ -101,8 +99,7 @@ public class Traitement {
 			}
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.trace("error");
 		}
 
 	}
@@ -126,8 +123,7 @@ public class Traitement {
 			}
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.trace("error");
 		}
 
 	}
