@@ -98,7 +98,7 @@ public class Traitement {
 
 				String title = resultSet.getString("title");
 				String author = resultSet.getString("author");
-				LOGGER.info(title + author);
+				LOGGER.trace("An exception occurred with message: {}", title, author);
 			}
 
 		} catch (SQLException e) {
@@ -121,7 +121,7 @@ public class Traitement {
 				String nom = resultSet.getString("lastname");
 				String prenom = resultSet.getString("firstname");
 				
-				LOGGER.info(nom + prenom);
+				LOGGER.trace("An exception occurred with message: {}", nom, prenom);
 				
 			}
 
