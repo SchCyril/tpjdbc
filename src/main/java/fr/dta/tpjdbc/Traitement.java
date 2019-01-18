@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 public class Traitement {
 	private static final  Logger LOGGER = LoggerFactory.getLogger(Traitement.class);
 	private static final String URL = "jdbc:postgresql://localhost:5432/tpJDBC";
-
+	private static final String ACTION_1 = "error";
 	public static void addBook(Book b) {
 
 		
@@ -34,7 +34,7 @@ public class Traitement {
 			b.setId(id);
 
 		} catch (SQLException e) {
-			LOGGER.trace("error");
+			LOGGER.trace(ACTION_1);
 
 		}
 
@@ -61,7 +61,7 @@ public class Traitement {
 			c.setId(idClient);
 
 		} catch (SQLException e) {
-			LOGGER.trace("error");
+			LOGGER.trace(ACTION_1);
 		}
 
 	}
@@ -79,7 +79,7 @@ public class Traitement {
 			achatClient.executeUpdate();
 
 		} catch (SQLException e) {
-			LOGGER.trace("error");
+			LOGGER.trace(ACTION_1);
 		}
 	}
 
@@ -100,7 +100,7 @@ public class Traitement {
 			}
 
 		} catch (SQLException e) {
-			LOGGER.trace("error");
+			LOGGER.trace(ACTION_1);
 		}
 
 	}
@@ -124,7 +124,7 @@ public class Traitement {
 			}
 
 		} catch (SQLException e) {
-			LOGGER.trace("error");
+			LOGGER.trace(ACTION_1);
 		}
 
 	}
