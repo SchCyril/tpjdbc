@@ -13,6 +13,8 @@ import org.slf4j.LoggerFactory;
 
 
 public class Traitement {
+	private static final String AZERTY = "azerty";
+	private static final String POSTGRES = "postgres";
 	private static final  Logger LOGGER = LoggerFactory.getLogger(Traitement.class);
 	private static final String URL = "jdbc:postgresql://localhost:5432/tpJDBC";
 	private static final String ACTION_1 = "error";
@@ -20,7 +22,7 @@ public class Traitement {
 
 		
 
-		try (Connection conn = DriverManager.getConnection(URL, "postgres", "azerty");
+		try (Connection conn = DriverManager.getConnection(URL, POSTGRES, AZERTY);
 				PreparedStatement insertion = conn.prepareStatement("INSERT INTO Book(title, author) VALUES(?, ?)",
 						Statement.RETURN_GENERATED_KEYS);
 				ResultSet generatedKeys = insertion.getGeneratedKeys()) {
@@ -42,7 +44,7 @@ public class Traitement {
 
 	public static void addClient(Client c) {
 		
-		try (Connection conn = DriverManager.getConnection(URL, "postgres", "azerty");
+		try (Connection conn = DriverManager.getConnection(URL, POSTGRES, AZERTY);
 				PreparedStatement addClient = conn.prepareStatement(
 						"insert into Client(lastname, firstname, gender, favbook) values(?, ?, ?, ?)",
 						Statement.RETURN_GENERATED_KEYS);
@@ -69,7 +71,7 @@ public class Traitement {
 	public static void achatClient(Book b, Client c) {
 
 		
-		try (Connection conn = DriverManager.getConnection(URL, "postgres", "azerty");
+		try (Connection conn = DriverManager.getConnection(URL, POSTGRES, AZERTY);
 				PreparedStatement achatClient = conn
 						.prepareStatement("insert into Bookachete(id_client, id_book) values(?, ?)")) {
 
@@ -85,7 +87,7 @@ public class Traitement {
 
 	public static void livreParClient(Client c) {
 		
-		try (Connection conn = DriverManager.getConnection(URL, "postgres", "azerty");
+		try (Connection conn = DriverManager.getConnection(URL, POSTGRES, AZERTY);
 				PreparedStatement livreParClient = conn.prepareStatement(
 						"select title, author from book join bookachete on book.id = bookachete.id_book where bookachete.id_client = ?");
 				ResultSet resultSet = livreParClient.executeQuery()) {
@@ -107,7 +109,7 @@ public class Traitement {
 
 	public static void clientsParLivre(Book b) {
 		String url = "jdbc:postgresql://localhost:5432/tpJDBC";
-		try (Connection conn = DriverManager.getConnection(url, "postgres", "azerty");
+		try (Connection conn = DriverManager.getConnection(url, POSTGRES, AZERTY);
 				PreparedStatement clientsParLivre = conn.prepareStatement(
 						"select lastname, firstname from client join bookachete on client.id = bookachete.id_client where bookachete.id_book = ?");
 				ResultSet resultSet = clientsParLivre.executeQuery();) {
