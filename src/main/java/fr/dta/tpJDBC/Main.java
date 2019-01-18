@@ -5,13 +5,20 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Hello world!
  *
  */
 public class Main {
+	
+	final static Logger logger = LoggerFactory.getLogger(Traitement.class);
 
 	public static void main(String[] args) {
+		
+		
 
 		String url = "jdbc:postgresql://localhost:5432/tpJDBC";
 		try (Connection conn = DriverManager.getConnection(url, "postgres", "azerty");
@@ -53,7 +60,7 @@ public class Main {
 
 		} catch (SQLException e) {
 
-			e.printStackTrace();
+			logger.warn("attention");
 		}
 
 	}
